@@ -1,0 +1,29 @@
+@use 'variables.scss' as *;
+@use 'header.scss' as *;
+@use 'carousel.scss' as *;
+
+* {
+  box-sizing: border-box;
+  font-family: 'DM Sans';
+  font-weight: $regular-weight;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  color: $white-color;
+  background: #000000;
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(64, 64, 64, 1) 45%,
+    rgba(0, 0, 0, 1) 100%
+  );
+}
