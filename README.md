@@ -1,7 +1,7 @@
 
 # Carousel-App-Project
 
-### [Live Demo](https://www.google.com/search?q=https://sh00tn1ck29.github.io/Carousel-App-Project/) 
+### [Live Demo]([https://www.google.com/search?q=https://sh00tn1ck29.github.io/Carousel-App-Project/](https://sh00tn1ck29.github.io/Carousel-App-Project/)) 
 
 An interactive, dynamic slider application that explores America's national parks by fetching real-time gallery data from the official National Park Service (NPS) REST API. The project features a custom-built carousels mechanism with smooth animations and complete asynchronous state management.
 
