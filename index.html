@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Carousel APP</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="header__text">
+        <div class="header__slogan">Explore America</div>
+        <h1 class="header__title">National Parks</h1>
+      </div>
+      <div class="header__parks">10 parks</div>
+    </header>
+
+    <main class="main">
+      <div class="spinner"></div>
+      <div class="carousel carousel--hidden">
+        <div class="carousel__list">
+          <div class="carousel__container"></div>
+        </div>
+        <p class="carousel__description">
+          America’s national parks are living landscapes of wonder, protecting
+          ancient forests, dramatic canyons, and diverse wildlife. Each
+          sanctuary holds a unique story of nature’s raw beauty, waiting for you
+          to discover.
+        </p>
+        <div class="carousel__buttons">
+          <button class="carousel__button carousel__button--prev"><</button>
+          <span class="carousel__counter">1/10</span>
+          <button class="carousel__button carousel__button--next">></button>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">Use arrow keys or swipe to explore</footer>
+    <script src="src/scripts/index.js" type="module"></script>
+  </body>
+</html>
