@@ -1,9 +1,13 @@
 import { fetchParks } from '../gateways/index.js';
 
-export const renderSlides = (parksArray, container) => {
-  const sliedesHTML = parksArray
+const INITIAL_PARK_INDEX = 4;
+
+export const renderSlides = (parksArray) => {
+  const carouselContainer = document.querySelector('.carousel__container');
+
+  const slidesHTML = parksArray
     .map((park, index) => {
-      const parkImage = park.images?.[0]?.url || ''; 
+      const parkImage = park.images[0].url;
       return `
       <a class="carousel__slide" href="${park.url}" data-index="${index}" 
          style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.6)), url('${parkImage}')">
@@ -14,12 +18,8 @@ export const renderSlides = (parksArray, container) => {
     })
     .join('');
 
-  container.innerHTML = sliedesHTML;
+  carouselContainer.innerHTML = slidesHTML;
 };
-
-let count = 4;
-const maxSlides = 9;
-let slides;
 
 const spinnerElem = document.querySelector('.spinner');
 const carouselElem = document.querySelector('.carousel');
@@ -29,51 +29,62 @@ const counterElem = document.querySelector('.carousel__counter');
 const prevButton = document.querySelector('.carousel__button--prev');
 const nextButton = document.querySelector('.carousel__button--next');
 
-const updateSlider = () => {
+let slides;
+
+const updateSlider = (currentParkIndex, totalSlides) => {
   slides.forEach((slide) => {
     const slideIndex = +slide.dataset.index;
-    if (count === slideIndex) {
+    if (currentParkIndex === slideIndex) {
       slide.classList.add('carousel__slide--selected');
-      counterElem.textContent = `${count + 1}/${maxSlides + 1}`;
+      counterElem.textContent = `${currentParkIndex + 1}/${totalSlides}`;
     } else {
       slide.classList.remove('carousel__slide--selected');
     }
   });
 };
 
-const moveSlider = () => {
+const moveSlider = (currentParkIndex) => {
   const listWidth = carouselList.clientWidth;
   const slideWidth = 280;
   const stepWidth = 295;
   const centerOffset = listWidth / 2 - slideWidth / 2;
-  const translation = centerOffset - count * stepWidth;
+  const translation = centerOffset - currentParkIndex * stepWidth;
   carouselContainer.style.transform = `translateX(${translation}px)`;
 };
 
-prevButton.addEventListener('click', () => {
-  if (count > 0) {
-    count--;
-    updateSlider();
-    moveSlider();
-  }
-});
+const initCarousel = (totalSlides) => {
+  let currentParkIndex = INITIAL_PARK_INDEX;
 
-nextButton.addEventListener('click', () => {
-  if (count < maxSlides) {
-    count++;
-    updateSlider();
-    moveSlider();
-  }
-});
+  prevButton.addEventListener('click', () => {
+    if (currentParkIndex > 0) {
+      currentParkIndex--;
+      updateSlider(currentParkIndex, totalSlides);
+      moveSlider(currentParkIndex);
+    }
+  });
+
+  nextButton.addEventListener('click', () => {
+    if (currentParkIndex < totalSlides - 1) {
+      currentParkIndex++;
+      updateSlider(currentParkIndex, totalSlides);
+      moveSlider(currentParkIndex);
+    }
+  });
+
+  updateSlider(currentParkIndex, totalSlides);
+  moveSlider(currentParkIndex);
+};
 
 fetchParks().then((data) => {
-  renderSlides(data, carouselContainer);
+  if (!data || data.length === 0) return;
+
+  renderSlides(data);
 
   slides = document.querySelectorAll('.carousel__slide');
 
-  updateSlider();
-  moveSlider();
+  initCarousel(data.length);
 
   spinnerElem.classList.add('spinner--hidden');
   carouselElem.classList.remove('carousel--hidden');
 });
+
