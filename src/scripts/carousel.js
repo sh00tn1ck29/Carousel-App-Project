@@ -3,7 +3,7 @@ import { fetchParks } from '../gateways/index.js';
 export const renderSlides = (parksArray, container) => {
   const sliedesHTML = parksArray
     .map((park, index) => {
-      const parkImage = park.images?.[0]?.url || ''; // Безопасная проверка фото
+      const parkImage = park.images?.[0]?.url || ''; 
       return `
       <a class="carousel__slide" href="${park.url}" data-index="${index}" 
          style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.6)), url('${parkImage}')">
