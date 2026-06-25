@@ -1,6 +1,6 @@
 import { fetchParks } from '../gateways/index.js';
 
-const INITIAL_PARK_INDEX = 4;
+const INITIAL_PARK_INDEX = 24;
 
 export const renderSlides = (parksArray) => {
   const carouselContainer = document.querySelector('.carousel__container');
